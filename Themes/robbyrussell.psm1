@@ -14,6 +14,11 @@ function Write-Theme {
         $promtSymbolColor = $sl.Colors.WithForegroundColor
     }
     
+    #check for elevated prompt,copyed from paradox theme
+    If (Test-Administrator) {
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.ElevatedSymbol) " -ForegroundColor $sl.Colors.AdminIconForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+    }
+    
     #check the python virtual environment
     If (Test-VirtualEnv) {
         $prompt += Write-Prompt -Object ("(" + $(Get-VirtualEnvName) + ") ")
